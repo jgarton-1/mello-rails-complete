@@ -13,7 +13,6 @@ function sendUserToBoards() {
   if (localStorage.getItem('user')) {
     location.replace('/boards');
   }
-}
 
 function setAuth(setting) {
   authSetting = setting;
@@ -64,10 +63,10 @@ function handleSignupResponse(status) {
 
 function handleLoginResponse(data, status, jqXHR) {
   if (status === 'success') {
-    let jwt = jqXHR.getResponseHeader('authorization');
+    let token = jqXHR.getResponseHeader('authorization');
     let user = JSON.stringify(data);
 
-    localStorage.setItem('authorization', jwt);
+    localStorage.setItem('authorization', token);
     localStorage.setItem('user', user);
     sendUserToBoards();
   } else {
