@@ -13,6 +13,7 @@ function sendUserToBoards() {
   if (localStorage.getItem('user')) {
     location.replace('/boards');
   }
+}
 
 function setAuth(setting) {
   authSetting = setting;
