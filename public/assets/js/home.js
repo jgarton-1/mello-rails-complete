@@ -88,6 +88,8 @@ function authenticateUser(email, password) {
   }).then(function(data, status, jqXHR) {
       if (authSetting === 'signup') {
         handleSignupResponse(data, status, jqXHR);
+      } else{
+        handleLoginResponse(data, status, jqXHR);
       }
   })
     .catch(function(err) {
