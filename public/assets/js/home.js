@@ -57,17 +57,18 @@ function handleSignupResponse(status) {
     setAuth('login');
   } else {
     displayMessage(
-      'Something went wrong. A user with this account may Already exist.', 'danger'
+      'Something went wrong. A user with this account may already exist.',
+      'danger'
     );
   }
 }
 
 function handleLoginResponse(data, status, jqXHR) {
   if (status === 'success') {
-    let token = jqXHR.getResponseHeader('authorization');
+    let jwt = jqXHR.getResponseHeader('authorization');
     let user = JSON.stringify(data);
 
-    localStorage.setItem('authorization', token);
+    localStorage.setItem('authorization', jwt);
     localStorage.setItem('user', user);
     sendUserToBoards();
   } else {
@@ -84,19 +85,20 @@ function authenticateUser(email, password) {
         password
       }
     },
-    method:'POST'
-  }).then(function(data, status, jqXHR) {
+    method: 'POST'
+  })
+    .then(function(data, status, jqXHR) {
       if (authSetting === 'signup') {
-        handleSignupResponse(data, status, jqXHR);
-      } else{
+        handleSignupResponse(status);
+      } else {
         handleLoginResponse(data, status, jqXHR);
       }
-  })
+    })
     .catch(function(err) {
       if (authSetting === 'signup') {
         handleSignupResponse(err.statusText);
       } else {
-        handleLoginResponse(err.statusText)
+        handleLoginResponse(err.statusText);
       }
     });
 }
