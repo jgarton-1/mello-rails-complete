@@ -25,7 +25,7 @@ function setAuth(setting) {
   } else {
     $setSignUp.addClass('active');
     $setLogin.removeClass('active');
-    localStorage.setItem('authorization', jwt);
+    localStorage.setItem('authorization', null);
     $submitButton.text('Sign Up');
   }
 }
